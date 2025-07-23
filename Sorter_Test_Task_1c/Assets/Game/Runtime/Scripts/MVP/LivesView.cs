@@ -12,11 +12,16 @@ namespace Game.Runtime.Scripts.MVP
         private GameConfig _gameConfig;
 
         [Inject]
-        public void Construct(LivesPresenter presenter, GameConfig gameConfig, TMP_Text livesText)
+        public void Construct(
+            LivesPresenter presenter, 
+            GameConfig gameConfig, 
+            TMP_Text livesText)
         {
             _presenter = presenter;
             _gameConfig = gameConfig;
             _livesText = livesText;
+
+            UpdateView(_gameConfig.Lives);
         }
         
         private void UpdateView(int lives)

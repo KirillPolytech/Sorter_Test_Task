@@ -47,7 +47,7 @@ namespace Game.Runtime.Scripts.EventBusThings
                 return;
             }
 
-            Debug.LogError($"[Subscribe] Can't find key [Time: {Time.time}]");
+            Debug.LogError($"[Invoke] Can't find key {key} [Time: {Time.time}]");
         }
     }
 }

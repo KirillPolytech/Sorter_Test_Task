@@ -1,5 +1,5 @@
 ﻿using System;
-using Unity.VisualScripting;
+using Zenject;
 
 namespace Game.Runtime.Scripts.MVP
 {
@@ -9,14 +9,10 @@ namespace Game.Runtime.Scripts.MVP
         
         public event Action<int> OnLivesChanged;
 
+        [Inject]
         public LivesPresenter(GameModel model)
         {
             _model = model;
-        }
-        
-        private void OnChangedHandler()
-        {
-            OnLivesChanged?.Invoke(_model.Score.Value);
         }
         
         public void Initialize()
@@ -27,6 +23,11 @@ namespace Game.Runtime.Scripts.MVP
         public void Dispose()
         {
             _model.Lives.OnChanged -= OnChangedHandler;
+        }
+        
+        private void OnChangedHandler()
+        {
+            OnLivesChanged?.Invoke(_model.Lives.Value);
         }
     }
 }

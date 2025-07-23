@@ -1,6 +1,5 @@
 using Game.Runtime.Scripts.Config;
 using Game.Runtime.Scripts.EventBusThings;
-using Game.Runtime.Scripts.InputSystem;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +14,6 @@ namespace Game.Runtime.Scripts.Contexts
         {
             Container.BindInstance(gameConfig).AsSingle();
             Container.BindInterfacesAndSelfTo<EventBus>().AsSingle();
-            Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle();
         }
     }
 }

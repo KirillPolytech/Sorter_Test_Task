@@ -9,6 +9,7 @@ namespace Game.Runtime.Scripts.MVP
         
         public event Action<int> OnScoreChanged;
 
+        [Inject]
         public ScorePresenter(GameModel model)
         {
             _model = model;

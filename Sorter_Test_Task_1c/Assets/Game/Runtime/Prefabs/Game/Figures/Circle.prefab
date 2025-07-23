@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5456783530195731646}
   - component: {fileID: 6067042787109496799}
   - component: {fileID: 3116542513973480522}
+  - component: {fileID: 8294209509394903323}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -4566925204912865481, guid: ae2713db9261ee041b6c2a324417fec7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8698c5250d9a4453bfde77aee14728c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 3116542513973480522}
+  figureType: 0
 --- !u!114 &3116542513973480522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,17 +132,17 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: -5
-        y: 0
+        x: -7
+        y: 3
         z: 0
       TangentIn:
         x: 0
         y: 0
-        z: -1
+        z: 0
       TangentOut:
         x: 0
         y: 0
-        z: 1
+        z: 0
       Rotation:
         value:
           x: 0
@@ -149,17 +150,17 @@ MonoBehaviour:
           z: 0
           w: 1
     - Position:
-        x: 5
-        y: 0
-        z: 3
+        x: 7
+        y: 3
+        z: 0
       TangentIn:
         x: 0
         y: 0
-        z: -1
+        z: 0
       TangentOut:
         x: 0
         y: 0
-        z: 1
+        z: 0
       Rotation:
         value:
           x: 0
@@ -167,9 +168,9 @@ MonoBehaviour:
           z: 0
           w: 1
     m_MetaData:
-    - Mode: 2
+    - Mode: 1
       Tension: 0.5
-    - Mode: 2
+    - Mode: 1
       Tension: 0.5
     m_Closed: 0
     m_IntData:
@@ -182,3 +183,49 @@ MonoBehaviour:
       m_Data: []
   m_Knots:
     m_KnotsLink: []
+--- !u!61 &8294209509394903323
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659299156086068794}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.2775}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.28, y: 1.2775}
+  m_EdgeRadius: 0

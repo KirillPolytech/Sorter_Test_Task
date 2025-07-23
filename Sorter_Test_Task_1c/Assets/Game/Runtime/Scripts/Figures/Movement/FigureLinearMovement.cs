@@ -1,20 +1,25 @@
-﻿using Game.Runtime.Scripts.Config;
+﻿using System;
+using Game.Runtime.Scripts.Config;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
-using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Game.Runtime.Scripts.Figures.Movement
 {
-    public class FigureLinearMovement : IMoveable, ITickable
+    public class FigureLinearMovement : IMoveable
     {
-        private Transform _figureTransform;
-        private SplineContainer  _splineContainer;
-        private GameConfig _gameConfig;
+        private readonly Transform _figureTransform;
+        private readonly SplineContainer  _splineContainer;
+        private readonly GameConfig _gameConfig;
+        
+        public Action OnFinishedMoving;
         
         private float _progressTime;
         private bool _isRunning;
+        private float _speed;
         
-        public void Initialize(
+        public FigureLinearMovement(
             Transform figureTransform, 
             SplineContainer  splineContainer,
             GameConfig gameConfig)
@@ -26,15 +31,19 @@ namespace Game.Runtime.Scripts.Figures.Movement
 
         public void Start()
         {
+            Moving();
+            _figureTransform.GameObject().SetActive(true);
+            
             _isRunning = true;
             _progressTime = 0;
+            _speed = Random.Range(_gameConfig.FigureSpeedRange[0], _gameConfig.FigureSpeedRange[1]);
         }
         
-        public void Tick()
+        public void Update()
         {
             if (!_isRunning)
                 return;
-
+            
             Moving();
         }
 
@@ -45,7 +54,12 @@ namespace Game.Runtime.Scripts.Figures.Movement
 
             _figureTransform.position = pos;
             
-            _progressTime += Time.deltaTime * Random.Range(_gameConfig.FigureSpeedRange[0], _gameConfig.FigureSpeedRange[1]);
+            _progressTime += Time.deltaTime * _speed;
+
+            if (_progressTime >= 1)
+            {
+                OnFinishedMoving?.Invoke();
+            }
         }
 
         public void Pause()

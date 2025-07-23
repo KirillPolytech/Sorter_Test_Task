@@ -4,9 +4,9 @@ namespace Game.Runtime.Scripts.EventBusThings
 {
     public class ColliderHitSignal
     {
-        public Collider HitObject { get; }
+        public Collider2D HitObject { get; }
 
-        public ColliderHitSignal(Collider hitObject)
+        public ColliderHitSignal(Collider2D hitObject)
         {
             HitObject = hitObject;
         }

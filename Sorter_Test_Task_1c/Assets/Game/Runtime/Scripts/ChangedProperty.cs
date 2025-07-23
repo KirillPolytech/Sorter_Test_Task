@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace InTheLens.Runtime.Quests
+namespace Game.Runtime.Scripts
 {
     [Serializable]
     public class ChangedProperty<TValue> : IEquatable<ChangedProperty<TValue>>

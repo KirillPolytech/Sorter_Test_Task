@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa2e114b8e7461899dd29047083ad19, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  Lives: 3
-  FiguresCount: 5
-  LivesText: 'Lives:'
-  ScoreText: 'Score:'
+  Lives: 6
+  WinFiguresCount: 4
+  FigureSpeedRange: {x: 0.025, y: 0.05}
+  SpawnDelay: {x: 1, y: 5}
+  LivesText: "\u0416\u0438\u0437\u043D\u0438:"
+  ScoreText: "\u0421\u0447\u0451\u0442:"

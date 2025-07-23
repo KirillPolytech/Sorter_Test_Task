@@ -1,31 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Runtime.Scripts.Config;
 using Game.Runtime.Scripts.Factories;
 using Game.Runtime.Scripts.Figures;
+using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace Game.Runtime.Scripts.Pools
 {
-    public class FigurePool
+    public class FigurePool : IInitializable
     {
         private readonly FigureFactory _factory;
+        private readonly GameConfig _gameConfig;
         private readonly Dictionary<Type, Queue<Figure>> _pool = new();
+        
+        public readonly List<Type> _figureTypes = new() 
+            {typeof(SquareFigure), typeof(CircleFigure), typeof(StarFigure), typeof(TriangleFigure)};
+
 
         [Inject]
-        public FigurePool(FigureFactory factory)
+        public FigurePool(FigureFactory factory, GameConfig gameConfig)
         {
             _factory = factory;
+            _gameConfig = gameConfig;
+        }
+        
+        public void Initialize()
+        {
+            for (int i = 0; i < _figureTypes.Count; i++)
+            {
+                for (int j = 0; j < _gameConfig.WinFiguresCount / _figureTypes.Count; j++)
+                {
+                    Return(_factory.Create(_figureTypes[i]));
+                }
+            }
         }
 
-        public T Get<T>() where T : Figure
+        public Figure Get(Type type)
         {
-            Type type = typeof(T);
-
             if (_pool.TryGetValue(type, out var queue) && queue.Count > 0)
             {
                 var instance = queue.Dequeue();
-                instance.gameObject.SetActive(true);
-                return (T) instance;
+                return instance;
+            }
+
+            return _factory.Create(type);
+        }
+        
+        public T Get<T>(Type type) where T : Figure
+        {
+            if (_pool.TryGetValue(type, out var queue) && queue.Count > 0)
+            {
+                var instance = queue.Dequeue();
+                return instance as T;
             }
 
             return _factory.Create<T>();
@@ -35,14 +63,13 @@ namespace Game.Runtime.Scripts.Pools
         {
             Type type = figure.GetType();
 
-            if (!_pool.TryGetValue(type, out Queue<Figure> queue))
+            if (!_pool.ContainsKey(type))
             {
-                queue = new Queue<Figure>();
-                _pool[type] = new Queue<Figure>();
+                _pool.Add(type, new Queue<Figure>());
             }
 
             figure.gameObject.SetActive(false);
-            queue.Enqueue(figure);
+            _pool[type].Enqueue(figure);
         }
     }
 }

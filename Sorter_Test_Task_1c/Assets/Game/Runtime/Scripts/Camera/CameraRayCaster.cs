@@ -10,7 +10,7 @@ namespace Game.Runtime.Scripts.Camera
     {
         private readonly Mouse _mouse = Mouse.current;
 
-        private UnityEngine.Camera _camera;
+        public UnityEngine.Camera Camera { get; private set; }
         private EventBus _eventBus;
 
         [Inject]
@@ -19,24 +19,14 @@ namespace Game.Runtime.Scripts.Camera
             _eventBus = eventBus;
         }
 
-        private void OnEnable()
-        {
-            _eventBus.Subscribe<PlayerInputSignal>(GetInputData);
-        }
-
-        private void OnDestroy()
-        {
-            _eventBus.UnSubscribe<PlayerInputSignal>(GetInputData);
-        }
-
         private void Awake()
         {
-            _camera = GetComponent<UnityEngine.Camera>();
+            Camera = GetComponent<UnityEngine.Camera>();
         }
-        
-        private void GetInputData(PlayerInputSignal inputData)
+
+        private void Update()
         {
-            if (inputData.InputData.IsHoldingLeftMouseButton)
+            if (Mouse.current.leftButton.isPressed)
             {
                 CastRay();
             }
@@ -44,12 +34,13 @@ namespace Game.Runtime.Scripts.Camera
 
         private void CastRay()
         {
-            Ray ray = _camera.ScreenPointToRay(_mouse.position.ReadValue());
+            Vector2 worldPosition = Camera.ScreenToWorldPoint(_mouse.position.ReadValue());
 
-            if (!Physics.Raycast(ray, out RaycastHit _hit)) 
+            Collider2D hit = Physics2D.OverlapPoint(worldPosition);
+            if (hit == null)
                 return;
-            
-            _eventBus.Invoke(new ColliderHitSignal(_hit.collider));
+
+            _eventBus.Invoke(new ColliderHitSignal(hit));
         }
     }
 }
