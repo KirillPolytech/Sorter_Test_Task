@@ -7,4 +7,4 @@
 
 В Game->Runtime->Configs->GameSettings можно настроить параметры игры.
 
-![Alt text](Vids/Gameplay.mp4). 
+https://github.com/user-attachments/assets/869d71c4-be62-4d00-9d11-78994503d5a2
