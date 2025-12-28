@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Runtime.Scripts.Config;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 using Random = UnityEngine.Random;
@@ -32,7 +31,7 @@ namespace Game.Runtime.Scripts.Figures.Movement
         public void Start()
         {
             Moving();
-            _figureTransform.GameObject().SetActive(true);
+            _figureTransform.gameObject.SetActive(true);
             
             _isRunning = true;
             _progressTime = 0;

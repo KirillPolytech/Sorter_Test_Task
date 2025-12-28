@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using Game.Runtime.Scripts.Config;
 using Game.Runtime.Scripts.Factories;
 using Game.Runtime.Scripts.Figures;
-using UnityEngine;
 using Zenject;
-using Object = UnityEngine.Object;
 
 namespace Game.Runtime.Scripts.Pools
 {

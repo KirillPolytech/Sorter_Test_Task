@@ -1,11 +1,9 @@
-using System;
 using Game.Runtime.Scripts.Config;
 using Game.Runtime.Scripts.DragSystem;
 using Game.Runtime.Scripts.EventBusThings;
 using Game.Runtime.Scripts.Figures.FigureSlots;
 using Game.Runtime.Scripts.Figures.Movement;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Splines;
 using Zenject;
 
